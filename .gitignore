@@ -1,2 +1,7 @@
+# Chalice
 .chalice/deployments/
 .chalice/venv/
+
+# Pycharm
+.idea
+.idea/*
