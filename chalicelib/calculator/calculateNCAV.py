@@ -2,31 +2,31 @@ import json
 
 from urllib.request import urlopen
 
-def calculateNCAVPerShare():
 
+def calculate_ncav_per_share():
     # Call API to get balance sheet
-    balanceSheetUrl = "https://financialmodelingprep.com/api/v3/financials/balance-sheet-statement/AAPL?period=quarter?datatype=json"
-    balanceSheetResponse = urlopen(balanceSheetUrl)
-    decodedBalanceSheetData = balanceSheetResponse.read().decode("utf-8")
+    balance_sheet_url = "https://financialmodelingprep.com/api/v3/financials/balance-sheet-statement/AAPL?period=quarter?datatype=json"
+    balance_sheet_response = urlopen(balance_sheet_url)
+    decoded_balance_sheet_data = balance_sheet_response.read().decode("utf-8")
 
     # Get relevant balance sheet data
-    balanceSheetData = json.loads(decodedBalanceSheetData)['financials'][0]
-    totalCurrentAssets = float(balanceSheetData['Total current assets'])
-    totalLiabilities = float(balanceSheetData['Total liabilities'])
+    balance_sheet_data = json.loads(decoded_balance_sheet_data)['financials'][0]
+    total_current_assets = float(balance_sheet_data['Total current assets'])
+    total_liabilities = float(balance_sheet_data['Total liabilities'])
 
     # Call API to get income statement
-    incomeStatementUrl = "https://financialmodelingprep.com/api/v3/financials/income-statement/AAPL?period=quarter?datatype=json"
-    incomeStatementResponse = urlopen(incomeStatementUrl)
-    decodedIncomeStatementData = incomeStatementResponse.read().decode("utf-8")
+    income_statement_url = "https://financialmodelingprep.com/api/v3/financials/income-statement/AAPL?period=quarter?datatype=json"
+    income_statement_response = urlopen(income_statement_url)
+    decoded_income_statement_data = income_statement_response.read().decode("utf-8")
 
     # Get relevant income statement data
-    incomeStatementData = json.loads(decodedIncomeStatementData)['financials'][0]
-    totalSharesOutstanding = float(incomeStatementData['Weighted Average Shs Out'])
+    income_statement_data = json.loads(decoded_income_statement_data)['financials'][0]
+    total_shares_outstanding = float(income_statement_data['Weighted Average Shs Out'])
 
     # Calculate NCAV/share
-    ncavValue = totalCurrentAssets - totalLiabilities
-    ncavValuePerShare = ncavValue / totalSharesOutstanding
-    return ncavValuePerShare
+    ncav_value = total_current_assets - total_liabilities
+    ncav_value_per_share = ncav_value / total_shares_outstanding
+    return ncav_value_per_share
 
-calculateNCAVPerShare()
 
+calculate_ncav_per_share()
