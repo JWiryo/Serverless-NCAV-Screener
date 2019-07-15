@@ -2,21 +2,31 @@ import json
 
 from urllib.request import urlopen
 
-def calculateNCAV():
+def calculateNCAVPerShare():
 
     # Call API to get balance sheet
-    url = "https://financialmodelingprep.com/api/v3/financials/balance-sheet-statement/AAPL?datatype=json"
-    response = urlopen(url)
-    decodedAPIData = response.read().decode("utf-8")
+    balanceSheetUrl = "https://financialmodelingprep.com/api/v3/financials/balance-sheet-statement/AAPL?period=quarter?datatype=json"
+    balanceSheetResponse = urlopen(balanceSheetUrl)
+    decodedBalanceSheetData = balanceSheetResponse.read().decode("utf-8")
 
-    # Get relevant financial data
-    financialData = json.loads(decodedAPIData)['financials'][0]
-    totalCurrentAssets = float(financialData['Total current assets'])
-    totalLiabilities = float(financialData['Total liabilities'])
+    # Get relevant balance sheet data
+    balanceSheetData = json.loads(decodedBalanceSheetData)['financials'][0]
+    totalCurrentAssets = float(balanceSheetData['Total current assets'])
+    totalLiabilities = float(balanceSheetData['Total liabilities'])
 
-    # Calculate NCAV
+    # Call API to get income statement
+    incomeStatementUrl = "https://financialmodelingprep.com/api/v3/financials/income-statement/AAPL?period=quarter?datatype=json"
+    incomeStatementResponse = urlopen(incomeStatementUrl)
+    decodedIncomeStatementData = incomeStatementResponse.read().decode("utf-8")
+
+    # Get relevant income statement data
+    incomeStatementData = json.loads(decodedIncomeStatementData)['financials'][0]
+    totalSharesOutstanding = float(incomeStatementData['Weighted Average Shs Out'])
+
+    # Calculate NCAV/share
     ncavValue = totalCurrentAssets - totalLiabilities
-    return ncavValue
+    ncavValuePerShare = ncavValue / totalSharesOutstanding
+    return ncavValuePerShare
 
-calculateNCAV()
+calculateNCAVPerShare()
 
