@@ -5,3 +5,6 @@
 # Pycharm
 .idea
 .idea/*
+
+# Constants
+chalicelib/constants/*
