@@ -9,6 +9,7 @@ verify_ssl = true
 pandas = "*"
 chalice = "*"
 lxml = "*"
+boto3 = "*"
 
 [requires]
 python_full_version = "3.7.4"
