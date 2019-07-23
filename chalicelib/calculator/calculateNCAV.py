@@ -34,7 +34,3 @@ class NcavCalculator:
         # Calculate NCAV/share
         ncav_value_per_share = ncav_value / total_shares_outstanding
         return ncav_value_per_share
-
-
-calc = NcavCalculator()
-calc.calculate_ncav_per_share('AAPL', calc.calculate_ncav('AAPL'))

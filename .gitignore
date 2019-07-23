@@ -8,3 +8,6 @@
 
 # Constants
 chalicelib/constants/*
+
+# pycache
+__pycache__/

@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-class Scraper:
+class SP500Scraper:
 
     @staticmethod
     def get_sp500_ticker_symbol_list():

@@ -19,11 +19,7 @@ class StockDecider:
         current_price = float(json.loads(decoded_realtime_price_data)['price'])
 
         # Decide if price is below buy threshold
-        if current_price <= BUY_THRESHOLD * ncav_value_per_share:
+        if current_price >= BUY_THRESHOLD * ncav_value_per_share:
             return True, current_price
         else:
             return False, ncav_value_per_share
-
-
-decider = StockDecider()
-decider.decide_to_buy_stock('AAPL', -4)
