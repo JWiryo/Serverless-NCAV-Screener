@@ -40,3 +40,6 @@ def find_cheap_stocks():
         email_content += "%s %s \n" % (cheap_stock_tuple[0], cheap_stock_tuple[1])
 
     mailer.sendEmail(email_content)
+
+
+find_cheap_stocks()

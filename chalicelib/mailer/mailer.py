@@ -6,7 +6,7 @@ class Mailer:
 
     def sendEmail(self, email_content):
         gmail_user = constants.GMAIL_USERNAME
-        gmail_app_password = constants.GMAIL_USERNAME
+        gmail_app_password = constants.GMAIL_APP_PASSWORD
         target_mail_list = constants.TARGET_MAIL
 
         email_text = self.create_email_message(email_content, gmail_user, target_mail_list)
@@ -15,12 +15,13 @@ class Mailer:
             server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
             server.ehlo()
             server.login(gmail_user, gmail_app_password)
-            server.sendmail(gmail_user, target_mail_list, email_text)
+            server.sendmail(gmail_user, gmail_user, email_text)
             server.close()
         except:
             print('Unable to connect to Gmail')
 
-    def create_email_message(self, email_content, gmail_user, target_mail_list):
+    @staticmethod
+    def create_email_message(email_content, gmail_user, target_mail_list):
         sent_from = gmail_user
         to = target_mail_list
         subject = 'Cheap NCAV Stocks'
