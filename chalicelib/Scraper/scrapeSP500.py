@@ -30,6 +30,6 @@ class SP500Scraper:
         symbols_list = (json.loads(decoded_symbols_response)["symbolsList"])
         for symbol in symbols_list:
             if float(symbol["price"]) <= 5:
-                very_cheap_stocks_list.append(symbol["symbol"])
+                very_cheap_stocks_list.append((symbol["symbol"], symbol["price"]))
 
         return very_cheap_stocks_list

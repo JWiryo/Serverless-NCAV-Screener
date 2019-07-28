@@ -25,12 +25,12 @@ def find_cheap_stocks():
     for ticker in tickers_list:
 
         # Calculate NCAV Value
-        ncav_value = ncav_calculator.calculate_ncav(ticker)
+        ncav_value = ncav_calculator.calculate_ncav(ticker[0])
 
         # If Positive, calculate NCAV Value
         if ncav_value >= 0:
-            ncav_value_per_share = ncav_calculator.calculate_ncav_per_share(ticker, ncav_value)
-            isCheap, price = stock_decider.decide_to_buy_stock(ticker, ncav_value_per_share)
+            ncav_value_per_share = ncav_calculator.calculate_ncav_per_share(ticker[0], ncav_value)
+            isCheap, price = stock_decider.decide_to_buy_stock_with_price(ncav_value_per_share, ticker[1])
             if isCheap:
                 good_ncav_shares_list.append((ticker, price))
         else:

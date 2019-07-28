@@ -23,3 +23,12 @@ class StockDecider:
             return True, current_price
         else:
             return False, ncav_value_per_share
+
+    @staticmethod
+    def decide_to_buy_stock_with_price(ncav_value_per_share, price):
+
+        # Decide if price is below buy threshold
+        if price <= BUY_THRESHOLD * ncav_value_per_share:
+            return True, price
+        else:
+            return False, ncav_value_per_share
