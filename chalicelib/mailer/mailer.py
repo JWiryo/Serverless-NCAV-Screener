@@ -1,6 +1,8 @@
 import smtplib
 import chalicelib.constants as constants
 
+from email.message import EmailMessage
+
 
 class Mailer:
 
@@ -15,21 +17,21 @@ class Mailer:
             server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
             server.ehlo()
             server.login(gmail_user, gmail_app_password)
-            server.sendmail(gmail_user, gmail_user, email_text)
+            server.sendmail(gmail_user, gmail_user, email_text.as_string())
             server.close()
         except:
             print('Unable to connect to Gmail')
 
     @staticmethod
     def create_email_message(email_content, gmail_user, target_mail_list):
-        sent_from = gmail_user
-        to = target_mail_list
-        subject = 'Cheap NCAV Stocks'
-        email_text = """\
-        From: %s
-        To: %s
-        Subject: %s
+        msg = EmailMessage()
+        msg['Subject'] = 'Cheap NCAV Stocks'
+        msg['From'] = gmail_user
+        msg['To'] = target_mail_list
 
+        email_text = """\
         %s
-        """ % (sent_from, ", ".join(to), subject, email_content)
-        return email_text
+        """ % email_content
+
+        msg.set_content(email_text)
+        return msg

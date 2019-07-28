@@ -14,8 +14,14 @@ class NcavCalculator:
 
         # Get relevant balance sheet data
         balance_sheet_data = json.loads(decoded_balance_sheet_data)['financials'][0]
-        total_current_assets = float(balance_sheet_data['Total current assets'])
-        total_liabilities = float(balance_sheet_data['Total liabilities'])
+        if balance_sheet_data['Total current assets'] != '':
+            total_current_assets = float(balance_sheet_data['Total current assets'])
+        else:
+            total_current_assets = 0
+        if balance_sheet_data['Total liabilities'] != '':
+            total_liabilities = float(balance_sheet_data['Total liabilities'])
+        else:
+            total_liabilities = 0
 
         ncav_value = total_current_assets - total_liabilities
         return ncav_value
