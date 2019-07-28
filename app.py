@@ -20,7 +20,7 @@ def find_cheap_stocks():
     email_content = ""
 
     # Scrape SP500 Tickers Data
-    tickers_list = scraper.get_sp500_ticker_symbol_list()
+    tickers_list = scraper.get_ticker_symbol_less_than_5()
 
     for ticker in tickers_list:
 
