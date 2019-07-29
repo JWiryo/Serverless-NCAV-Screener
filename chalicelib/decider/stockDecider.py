@@ -29,6 +29,6 @@ class StockDecider:
 
         # Decide if price is below buy threshold
         if price <= BUY_THRESHOLD * ncav_value_per_share:
-            return True, price
+            return True, ncav_value_per_share
         else:
             return False, ncav_value_per_share

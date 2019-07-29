@@ -33,6 +33,8 @@ def find_cheap_stocks():
             isCheap, price = stock_decider.decide_to_buy_stock_with_price(ncav_value_per_share, ticker[1])
             if isCheap:
                 good_ncav_shares_list.append((ticker, price))
+                # email_content = "%s %s \n" % (ticker[0], price)
+                # mailer.sendEmail(email_content)
         else:
             continue
 
